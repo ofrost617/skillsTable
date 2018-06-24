@@ -1,0 +1,22 @@
+{
+  "name": "skillstable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ofrost617/skillsTable.git"
+  },
+  "author": "Olivia Frost",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ofrost617/skillsTable/issues"
+  },
+  "homepage": "https://github.com/ofrost617/skillsTable#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.12.0"
+  }
+}
