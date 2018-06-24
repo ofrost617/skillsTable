@@ -48,13 +48,19 @@ function filterCandidateBySkill(candidates, skill) {
   return selectedCandidates;
 }
 
-const candidatesTable = document.getElementById('candidates_example');
-const newCandidatesTable = candidatesTable.cloneNode(true);
 
-removeRowsFromTable(newCandidatesTable);
-const newTbody = newCandidatesTable.getElementsByTagName('tbody')[0];
 
-const filteredJavaScriptCandidates = filterCandidateBySkill(newCandidates, 'JavaScript');
-addCandidatesToTable(newTbody, filteredJavaScriptCandidates);
+function createFilteredTable(candidates, skill) {
+  const candidatesTable = document.getElementById('candidates_example');
+  const newCandidatesTable = candidatesTable.cloneNode(true);
+  removeRowsFromTable(newCandidatesTable);
+  const newTbody = newCandidatesTable.getElementsByTagName('tbody')[0];
+  const filteredJavaScriptCandidates = filterCandidateBySkill(newCandidates, skill);
+  addCandidatesToTable(newTbody, filteredJavaScriptCandidates);
+  document.body.appendChild(newCandidatesTable);  
+}
 
-document.body.appendChild(newCandidatesTable);
+createFilteredTable(newCandidates, 'JavaScript');
+createFilteredTable(newCandidates, 'Docker');
+
+
