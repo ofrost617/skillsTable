@@ -45,12 +45,7 @@ function filterCandidateBySkill(candidates, skill) {
     }
   });
 
-  return [
-    { name: 'Kerrie', skills: ['JavaScript', 'Docker', 'Ruby'] },
-    { name: 'Jacquline', skills: ['JavaScript', 'Azure'] },
-    { name: 'Kathy', skills: ['JavaScript', 'Java'] },
-    { name: 'Anna', skills: ['JavaScript', 'AWS'] },
-  ];
+  return selectedCandidates;
 }
 
 const candidatesTable = document.getElementById('candidates_example');
@@ -59,7 +54,7 @@ const newCandidatesTable = candidatesTable.cloneNode(true);
 removeRowsFromTable(newCandidatesTable);
 const newTbody = newCandidatesTable.getElementsByTagName('tbody')[0];
 
-const filteredCandidates = filterCandidateBySkill(newCandidates, 'JavaScript');
-addCandidatesToTable(newTbody, filteredCandidates);
+const filteredJavaScriptCandidates = filterCandidateBySkill(newCandidates, 'JavaScript');
+addCandidatesToTable(newTbody, filteredJavaScriptCandidates);
 
 document.body.appendChild(newCandidatesTable);
