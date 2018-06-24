@@ -48,19 +48,28 @@ function filterCandidateBySkill(candidates, skill) {
   return selectedCandidates;
 }
 
+function copyExistingTable() {
 
+}
 
+// creates a copy of the existing table, removes rows from table, adds new body consisting
+// of filtered candidates, renders table
 function createFilteredTable(candidates, skill) {
   const candidatesTable = document.getElementById('candidates_example');
   const newCandidatesTable = candidatesTable.cloneNode(true);
+  newCandidatesTable.id = 'filteredTable';
   removeRowsFromTable(newCandidatesTable);
   const newTbody = newCandidatesTable.getElementsByTagName('tbody')[0];
-  const filteredJavaScriptCandidates = filterCandidateBySkill(newCandidates, skill);
-  addCandidatesToTable(newTbody, filteredJavaScriptCandidates);
-  document.body.appendChild(newCandidatesTable);  
+  const filteredCandidates = filterCandidateBySkill(candidates, skill);
+  addCandidatesToTable(newTbody, filteredCandidates);
+  document.body.appendChild(newCandidatesTable); 
 }
 
-createFilteredTable(newCandidates, 'JavaScript');
-createFilteredTable(newCandidates, 'Docker');
-
-
+const skillList = document.getElementById('list');
+skillList.addEventListener('change', () => {
+  if (document.getElementById('filteredTable')) {
+    document.getElementById('filteredTable').remove();
+  }
+  const selectedSkill = skillList.options[skillList.selectedIndex].value;
+  createFilteredTable(newCandidates, selectedSkill);
+});
