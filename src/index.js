@@ -32,15 +32,25 @@ function addCandidatesToTable(table, candidates) {
   candidates.forEach(candidate => insertCandidate(table, candidate.name, candidate.skills));
 }
 
+function _hasSkill(candidate, skill) {
+  return candidate.skills.includes(skill);
+}
+
 function filterCandidateBySkill(candidates, skill) {
-  const jsCandidates = [
+  const selectedCandidates = [];
+
+  candidates.forEach((candidate) => {
+    if (_hasSkill(candidate, skill)) {
+      selectedCandidates.push(candidate);
+    }
+  });
+
+  return [
     { name: 'Kerrie', skills: ['JavaScript', 'Docker', 'Ruby'] },
     { name: 'Jacquline', skills: ['JavaScript', 'Azure'] },
     { name: 'Kathy', skills: ['JavaScript', 'Java'] },
     { name: 'Anna', skills: ['JavaScript', 'AWS'] },
-  ]
-
-  return jsCandidates;
+  ];
 }
 
 const candidatesTable = document.getElementById('candidates_example');

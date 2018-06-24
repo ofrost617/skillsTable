@@ -5,4 +5,7 @@ module.exports = {
       "jasmine": true,
       "browser": true
     },
+    "rules": {
+      "no-underscore-dangle": 0
+    }
 };

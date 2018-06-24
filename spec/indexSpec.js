@@ -12,7 +12,7 @@ describe('Index', () => {
 
 
   it('displays candidates', () => {
-    expect(filterCandidateBySkill(candidates, 'Javascript')).toEqual([
+    expect(filterCandidateBySkill(candidates, 'JavaScript')).toEqual([
       { name: 'Kerrie', skills: ['JavaScript', 'Docker', 'Ruby'] },
       { name: 'Jacquline', skills: ['JavaScript', 'Azure'] },
       { name: 'Kathy', skills: ['JavaScript', 'Java'] },
