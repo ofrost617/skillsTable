@@ -33,8 +33,14 @@ function addCandidatesToTable(table, candidates) {
 }
 
 function filterCandidateBySkill(candidates, skill) {
-  // INSERT YOUR LOGIC HERE   <-------------------------
-  return candidates;
+  const jsCandidates = [
+    { name: 'Kerrie', skills: ['JavaScript', 'Docker', 'Ruby'] },
+    { name: 'Jacquline', skills: ['JavaScript', 'Azure'] },
+    { name: 'Kathy', skills: ['JavaScript', 'Java'] },
+    { name: 'Anna', skills: ['JavaScript', 'AWS'] },
+  ]
+
+  return jsCandidates;
 }
 
 const candidatesTable = document.getElementById('candidates_example');
