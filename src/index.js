@@ -32,7 +32,7 @@ function addCandidatesToTable(table, candidates) {
   candidates.forEach(candidate => insertCandidate(table, candidate.name, candidate.skills));
 }
 
-function _hasSkill(candidate, skill) {
+function hasSkill(candidate, skill) {
   return candidate.skills.includes(skill);
 }
 
@@ -40,7 +40,7 @@ function filterCandidateBySkill(candidates, skill) {
   const selectedCandidates = [];
 
   candidates.forEach((candidate) => {
-    if (_hasSkill(candidate, skill)) {
+    if (hasSkill(candidate, skill)) {
       selectedCandidates.push(candidate);
     }
   });
@@ -48,28 +48,40 @@ function filterCandidateBySkill(candidates, skill) {
   return selectedCandidates;
 }
 
-function copyExistingTable() {
-
+function tableExists() {
+  return document.getElementById('filteredTable');
 }
 
-// creates a copy of the existing table, removes rows from table, adds new body consisting
-// of filtered candidates, renders table
-function createFilteredTable(candidates, skill) {
+function removeExistingTable() {
+  if (tableExists()) {
+    document.getElementById('filteredTable').remove();
+  }
+}
+
+function cloneExistingTable() {
   const candidatesTable = document.getElementById('candidates_example');
   const newCandidatesTable = candidatesTable.cloneNode(true);
   newCandidatesTable.id = 'filteredTable';
-  removeRowsFromTable(newCandidatesTable);
-  const newTbody = newCandidatesTable.getElementsByTagName('tbody')[0];
+
+  return newCandidatesTable;
+}
+
+function addFilteredCandidateRows(candidates, skill, table) {
+  const newTbody = table.getElementsByTagName('tbody')[0];
   const filteredCandidates = filterCandidateBySkill(candidates, skill);
   addCandidatesToTable(newTbody, filteredCandidates);
-  document.body.appendChild(newCandidatesTable); 
+}
+
+function renderFilteredTable(candidates, skill) {
+  const newTable = cloneExistingTable();
+  removeRowsFromTable(newTable);
+  addFilteredCandidateRows(candidates, skill, newTable);
+  document.body.appendChild(newTable);
 }
 
 const skillList = document.getElementById('list');
 skillList.addEventListener('change', () => {
-  if (document.getElementById('filteredTable')) {
-    document.getElementById('filteredTable').remove();
-  }
+  removeExistingTable();
   const selectedSkill = skillList.options[skillList.selectedIndex].value;
-  createFilteredTable(newCandidates, selectedSkill);
+  renderFilteredTable(newCandidates, selectedSkill);
 });
