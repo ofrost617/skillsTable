@@ -49,7 +49,7 @@ function filterCandidateBySkill(candidates, skill) {
 }
 
 function tableExists() {
-  return document.getElementById('filteredTable');
+  return !!document.getElementById('filteredTable');
 }
 
 function removeExistingTable() {
