@@ -37,30 +37,35 @@ describe('Index', () => {
     const dummyElement = document.createElement('table');
     dummyElement.id = 'filteredTable';
 
-    document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyElement);
+    spyOn(document, 'getElementById').and.returnValue(dummyElement);
     expect(tableExists()).toBe(true);
   });
 
-  // it('checks if a table doesnt exists on the webpage', () => {
-  //   const dummyElement = document.createElement('table');
-  //   dummyElement.id = 'notTable';
-  //   expect(tableExists()).toBe(false);
-  // });
+  it('checks if a table doesnt exists on the webpage', () => {
+    const dummyElement = document.createElement('table');
+    dummyElement.id = 'notTable';
+    expect(tableExists()).toBe(false);
+  });
 
-  // it('can remove an existing table from the webpage', () => {
-  //   const dummyElement = document.createElement('table');
-  //   dummyElement.id = 'filteredTable';
+  it('can remove an existing table from the webpage', () => {
+    const dummyElement = document.createElement('table');
+    dummyElement.id = 'filteredTable';
+    removeExistingTable();
+    expect(tableExists()).toBe(false);
+  });
 
-  //   document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyElement);
-  //   removeExistingTable();
-  //   expect(tableExists()).toBe(false);
-  // });
+  it('can remove a table that doesnt exist from the webpage', () => {
+    const dummyElement = document.createElement('table');
+    dummyElement.id = 'table';
+    expect(removeExistingTable()).toEqual('Cant remove table');
+  });
+
 
   // it('can clone a table', () => {
   //   const dummyCandidatesTable = document.createElement('table');
   //   dummyCandidatesTable.id = 'candidates_example';
   //   document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyCandidatesTable);
-  //   cloneExistingTable();    
+  //   cloneExistingTable();
   //   expect(newCandidatesTable.id.toEqual('filteredTable'));
   // });
 });

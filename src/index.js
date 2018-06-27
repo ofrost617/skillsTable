@@ -55,6 +55,8 @@ function tableExists() {
 function removeExistingTable() {
   if (tableExists()) {
     document.getElementById('filteredTable').remove();
+  } else {
+    return 'Cant remove table';
   }
 }
 
