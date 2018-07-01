@@ -47,25 +47,66 @@ describe('Index', () => {
     expect(tableExists()).toBe(false);
   });
 
-  it('can remove an existing table from the webpage', () => {
-    const dummyElement = document.createElement('table');
-    dummyElement.id = 'filteredTable';
-    removeExistingTable();
-    expect(tableExists()).toBe(false);
+  describe('removeExistingTable', () => {
+    it('will remove an existing table', () => {
+      const filteredTable = document.createElement('table');
+      filteredTable.id = 'filteredTable';
+      spyOn(filteredTable, 'remove');
+      spyOn(document, 'getElementById').and.returnValue(filteredTable);
+      removeExistingTable();
+      expect(filteredTable.remove).toHaveBeenCalled();
+    });
   });
 
-  it('can remove a table that doesnt exist from the webpage', () => {
-    const dummyElement = document.createElement('table');
-    dummyElement.id = 'table';
-    expect(removeExistingTable()).toEqual('Cant remove table');
+  describe('cloneExistingTable', () => {
+    beforeEach(() => {
+      const dummyElement = document.createElement('table');
+      dummyElement.id = 'candidates_example';
+      spyOn(document, 'getElementById').and.returnValue(dummyElement);
+    });
+
+    it('returns a clone of a table', () => {  
+      expect(cloneExistingTable().nodeName).toEqual('TABLE');
+    });
+
+    it("changes the cloned table id to 'filteredTable'", () => {
+      expect(cloneExistingTable().id).toEqual('filteredTable');
+    });
   });
 
+  describe('generateFilteredTBody', () => {
+    let tableBody;
 
-  // it('can clone a table', () => {
-  //   const dummyCandidatesTable = document.createElement('table');
-  //   dummyCandidatesTable.id = 'candidates_example';
-  //   document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyCandidatesTable);
-  //   cloneExistingTable();
-  //   expect(newCandidatesTable.id.toEqual('filteredTable'));
-  // });
+    beforeEach(() => {
+      const table = document.createElement('table');
+      tableBody = document.createElement('tbody');
+      table.appendChild(tableBody);
+      generateFilteredTBody(candidates, 'Ruby', table);
+    });
+    
+    it('adds candidates to a tbody', () => {
+      expect(tableBody.innerHTML).toContain('Kerrie');
+    });
+
+    it('does not add candidates without chosen skill', () => {
+      expect(tableBody.innerHTML).not.toContain('Mario  ');
+    });
+  });
+
+  describe('renderFilteredTable', () => {
+    it('calls document.body.appendChild with correct args', () => {
+      const dummyTable = document.createElement('table');
+      const dummyTBody = document.createElement('tbody');
+      dummyTable.appendChild(dummyTBody);
+      dummyTable.id = 'candidates_example';
+
+      spyOn(document, 'getElementById').and.returnValue(dummyTable);
+      spyOn(document.body, 'appendChild');
+      renderFilteredTable(candidates, 'Ruby');
+      console.log(document.body.appendChild.calls.mostRecent().args[0].innerHTML);
+      expect(
+        document.body.appendChild.calls.mostRecent().args[0].innerHTML
+      ).toContain('Kerrie');
+    });
+  });
 });

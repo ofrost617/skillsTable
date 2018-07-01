@@ -55,9 +55,7 @@ function tableExists() {
 function removeExistingTable() {
   if (tableExists()) {
     document.getElementById('filteredTable').remove();
-  } else {
-    return 'Cant remove table';
-  }
+  };
 }
 
 function cloneExistingTable() {
@@ -68,7 +66,7 @@ function cloneExistingTable() {
   return newCandidatesTable;
 }
 
-function addFilteredCandidateRows(candidates, skill, table) {
+function generateFilteredTBody(candidates, skill, table) {
   const newTbody = table.getElementsByTagName('tbody')[0];
   const filteredCandidates = filterCandidateBySkill(candidates, skill);
   addCandidatesToTable(newTbody, filteredCandidates);
@@ -77,7 +75,7 @@ function addFilteredCandidateRows(candidates, skill, table) {
 function renderFilteredTable(candidates, skill) {
   const newTable = cloneExistingTable();
   removeRowsFromTable(newTable);
-  addFilteredCandidateRows(candidates, skill, newTable);
+  generateFilteredTBody(candidates, skill, newTable);
   document.body.appendChild(newTable);
 }
 
