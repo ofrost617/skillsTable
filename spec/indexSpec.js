@@ -105,7 +105,7 @@ describe('Index', () => {
       renderFilteredTable(candidates, 'Ruby');
       console.log(document.body.appendChild.calls.mostRecent().args[0].innerHTML);
       expect(
-        document.body.appendChild.calls.mostRecent().args[0].innerHTML
+        document.body.appendChild.calls.mostRecent().args[0].innerHTML,
       ).toContain('Kerrie');
     });
   });
